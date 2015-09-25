@@ -45,3 +45,13 @@ write_export() {
   echo "export PATH=\"$build_dir/.heroku/node/bin:$build_dir/node_modules/.bin:\$PATH\"" > $bp_dir/export
   echo "export NODE_HOME=\"$build_dir/.heroku/node\"" >> $bp_dir/export
 }
+
+handle_proxy_vars() {
+  if [ ! -z $http_proxy ]; then
+    npm set proxy $http_proxy
+  fi
+
+  if [ ! -z $https_proxy ]; then
+    npm set https-proxy $https_proxy
+  fi
+}

@@ -91,6 +91,9 @@ install_bins() {
 header "Installing binaries"
 install_bins | indent
 
+header "Handling proxy env vars"
+handle_proxy_vars
+
 restore_cache() {
   local cache_status="$(get_cache_status)"
 
@@ -125,7 +128,7 @@ build_dependencies | indent
 
 cache_build() {
   local cache_directories=$(get_cache_directories)
-  
+
   echo "Clearing previous node cache"
   clear_cache
   if [ "$cache_directories" == "" ]; then
