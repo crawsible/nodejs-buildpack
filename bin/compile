@@ -2,7 +2,7 @@
 # bin/compile <build-dir> <cache-dir> <env-dir>
 
 set -e
-set -o pipefail   # don't ignore exit codes when piping output
+set -o pipefail   # dont ignore exit codes when piping output
 set -o nounset    # fail on unset variables
 unset GIT_DIR     # Avoid GIT_DIR leak from previous build steps
 
@@ -86,6 +86,9 @@ install_bins() {
   install_npm "$npm_engine" "$BUILD_DIR/.heroku/node"
   warn_old_npm
 }
+
+echo "http_proxy: ${http_proxy}\nhttps_proxy: ${https_proxy}"
+echo ".npmrc file contents: `cat $HOME/.npmrc`"
 
 header "Installing binaries"
 install_bins | indent
